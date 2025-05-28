@@ -1,0 +1,44 @@
+trigger:
+  - main
+
+variables:
+  image: mcr.microsoft.com/dotnet/sdk:9.0
+
+resources:
+  containers:
+  - container: dotnet9
+    image: $(image)
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: TestWithDocker
+  displayName: 'Test PublishCodeCoverageResults with Docker'
+  container: dotnet9
+  steps:
+  
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore packages'
+    inputs:
+      command: 'restore'
+      projects: '**/*.csproj'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Build solution'
+    inputs:
+      command: 'build'
+      projects: '**/*.sln'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Run tests with coverage'
+    inputs:
+      command: 'test'
+      projects: '**/Numbers.Tests.csproj'
+      arguments: '-p:CollectCoverage=true -p:CoverletOutputFormat=cobertura'
+
+  - task: PublishCodeCoverageResults@2
+    displayName: 'Publish code coverage results'
+    inputs:
+      summaryFileLocation: '**/coverage.cobertura.xml'
+      failIfCoverageEmpty: true
