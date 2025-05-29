@@ -2,22 +2,21 @@ trigger:
   - main
 
 variables:
-  image: mcr.microsoft.com/dotnet/sdk:9.0
+  image: sanjaysenthilkumar/codecoverage:latest
 
 resources:
   containers:
-  - container: dotnet9
+  - container: codecoverage
     image: $(image)
 
 pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-- job: TestWithDocker
-  displayName: 'Test PublishCodeCoverageResults with Docker'
-  container: dotnet9
+- job: TestWithCustomDocker
+  displayName: 'Test PublishCodeCoverageResults with Custom Docker'
+  container: codecoverage
   steps:
-  
   - task: DotNetCoreCLI@2
     displayName: 'Restore packages'
     inputs:
