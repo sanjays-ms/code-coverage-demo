@@ -20,13 +20,13 @@ namespace System.Numbers
 
 
         // Dummy method to remove 100 percent code coverage. Comment out this method if needed to achieve 100 percent coverage.
-        public bool IsEven(int number)
-        {
-            if (number == 0)
-            {
-                return true;
-            }
-            return number % 2 == 0;
-        }
+      //  public bool IsEven(int number)
+      //  {
+      //      if (number == 0)
+      //      {
+      //          return true;
+      //      }
+      //      return number % 2 == 0;
+      //  }
     }
 }

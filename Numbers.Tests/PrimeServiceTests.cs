@@ -1,5 +1,5 @@
 using System.Numbers;
-using Xunit;
+ using Xunit;
 
 namespace Numbers.Tests
 {
