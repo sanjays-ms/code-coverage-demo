@@ -1,8 +1,8 @@
 trigger:
   - main
 
-variables:
-  image: sanjaysenthilkumar/codecoverage:latest
+#variables:
+#  image: sanjaysenthilkumar/codecoverage:latest
 
 resources:
   containers:
